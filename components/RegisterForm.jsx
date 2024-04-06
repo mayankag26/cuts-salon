@@ -33,6 +33,10 @@ export default function RegisterForm() {
       return;
     }
 
+    console.log(openingTime);
+    console.log(closingTime);
+    console.log(typeof(openingTime));
+
     try {
       const resUserExists = await fetch("api/userExists", {
         method: "POST",
@@ -190,12 +194,12 @@ return (
 
         <input
           onChange={(e) => setOpeningTime(e.target.value)}
-          type="number"
+          type="time"
           placeholder="Opening Time (24 hr format)"
         />
         <input
           onChange={(e) => setClosingTime(e.target.value)}
-          type="number"
+          type="time"
           placeholder="Closing time (24 hr format)"
         />
 

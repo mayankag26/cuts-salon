@@ -38,10 +38,10 @@ const SalonSchema = new Schema(
 
     //for salon type "salon"
     openingTime: {
-      type: Number
+      type: String
     },
     closingTime: {
-      type: Number
+      type: String
     },
     currentNumber : {
       type: Number
