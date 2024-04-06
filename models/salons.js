@@ -20,7 +20,7 @@ const SalonSchema = new Schema(
     city: {
       type: String
     },
-    images: {
+    imagesUrl: {
       type: []
     },
     services: {
@@ -48,6 +48,9 @@ const SalonSchema = new Schema(
     },
     availableNumber : {
       type: Number
+    },
+    detail:{
+      type: String
     },
 
     //for salon type "individual"
