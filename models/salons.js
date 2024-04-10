@@ -52,6 +52,9 @@ const SalonSchema = new Schema(
     detail:{
       type: String
     },
+    genderServing:{
+      type: String
+    },
 
     //for salon type "individual"
     timeSlots : {

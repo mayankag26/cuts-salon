@@ -24,7 +24,7 @@ async function uploadFileToS3(file,filename){
 
     const command = new PutObjectCommand(params);
     await s3Client.send(command);
-    return filename;
+    return params.Key;
 }
 
 export async function POST(request){
@@ -38,10 +38,10 @@ export async function POST(request){
         // console.log(file);
 
         const buffer = Buffer.from(await file.arrayBuffer());
-        const fileName = await uploadFileToS3(buffer,file.name);
-        console.log(fileName);
-        const imageUrl = `${fileName}-${Date.now()}`;
-        console.log(imageUrl);
+        const imageUrl = await uploadFileToS3(buffer,file.name);
+        // console.log(res);
+        // const imageUrl = `${}-${Date.now()}`;
+        // console.log(imageUrl);
 
         return NextResponse.json({success:true,imageUrl})
 

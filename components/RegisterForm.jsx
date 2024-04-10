@@ -21,6 +21,7 @@ export default function RegisterForm() {
   const [detail, setDetail] = useState("");
   const [images, setImages] = useState([]);
   const [imagesUrl, setImagesUrl] = useState([]);
+  const [genderServing, setGenderServing] = useState("Men");
   const [error, setError] = useState("");
 
   const router = useRouter();
@@ -59,7 +60,7 @@ export default function RegisterForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name, email, password, address, city, services, salontype, openingTime, closingTime, detail, imagesUrl
+          name, email, password, address, city, services,genderServing, salontype, openingTime, closingTime, detail, imagesUrl
         }),
       });
 
@@ -160,6 +161,15 @@ return (
         />
 
 
+        <label for="genderServing">Gender Serving:</label>
+          <select name="genderServing" id="genderServing" onChange={(e) => { setGenderServing(e.target.value) }}>
+            <option value="Men">Men</option>
+            <option value="Women">Women</option>
+            <option value="Unisex">Unisex</option>
+          </select>
+
+
+
         <h3 className="font-bold">Services</h3>
 
         <div>
@@ -186,8 +196,10 @@ return (
         {/* </div> */}
 
 
+
+
         <label for="salontype">Salon Type:</label>
-        <select name="salontype" id="salontype" onChange={(e) => { setSalontype(e.target.value); console.log(e.target.value) }}>
+        <select name="salontype" id="salontype" onChange={(e) => { setSalontype(e.target.value) }}>
           <option value="Salon">Salon</option>
           <option value="Individual">Individual</option>
         </select>
