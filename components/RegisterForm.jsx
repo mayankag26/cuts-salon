@@ -11,6 +11,8 @@ export default function RegisterForm() {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState("");
   const [city, setCity] = useState("");
+  const [contactNo, setContactNo] = useState();
+
   const [currentService, setCurrentService] = useState("");
   const [currentServicePrice, setCurrentServicePrice] = useState();
 
@@ -29,7 +31,7 @@ export default function RegisterForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password || !address || !city || !services || !salontype || !openingTime || !closingTime || !detail || !imagesUrl) {
+    if (!name || !email || !password || !address || !genderServing || !city || !services || !salontype || !openingTime || !closingTime || !detail || !imagesUrl || !contactNo) {
       setError("All fields are necessary.");
       return;
     }
@@ -60,7 +62,7 @@ export default function RegisterForm() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name, email, password, address, city, services,genderServing, salontype, openingTime, closingTime, detail, imagesUrl
+          name, email, password, address, city,contactNo, services,genderServing, salontype, openingTime, closingTime, detail, imagesUrl
         }),
       });
 
@@ -159,6 +161,12 @@ return (
           type="text"
           placeholder="City"
         />
+
+         <input
+          onChange={(e) => setContactNo(e.target.value)}
+          type="number"
+          placeholder="Contact Number"
+        />       
 
 
         <label for="genderServing">Gender Serving:</label>

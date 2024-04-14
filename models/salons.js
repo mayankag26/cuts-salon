@@ -20,6 +20,9 @@ const SalonSchema = new Schema(
     city: {
       type: String
     },
+    contactNo:{
+      type: Number
+    },
     imagesUrl: {
       type: []
     },
