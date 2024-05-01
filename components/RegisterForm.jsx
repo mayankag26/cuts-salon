@@ -26,6 +26,9 @@ export default function RegisterForm() {
   const [genderServing, setGenderServing] = useState("Men");
   const [error, setError] = useState("");
 
+  // console.log(images);
+  // console.log(imagesUrl);
+
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -36,9 +39,9 @@ export default function RegisterForm() {
       return;
     }
 
-    console.log(openingTime);
-    console.log(closingTime);
-    console.log(typeof(openingTime));
+    // console.log(openingTime);
+    // console.log(closingTime);
+    // console.log(typeof(openingTime));
 
     try {
       const resUserExists = await fetch("api/userExists", {
@@ -82,7 +85,7 @@ export default function RegisterForm() {
   const handleFileChange = async (e) => {
     setImagesUrl([]);
     setImages(e.target.files);
-    console.log(images);
+    // console.log(images);
   };
 
   const handleAddService = (e) => {
@@ -96,7 +99,7 @@ export default function RegisterForm() {
   }
 
   async function fileUpload(image) {
-    console.log(image);
+    // console.log(image);
     const formData = new FormData();
     formData.append("file", image);
     // console.log(formData);
@@ -108,13 +111,13 @@ export default function RegisterForm() {
 
       const data = await response.json();
       // const imageUrl = data.imageUrl;
-      console.log(data.imageUrl);
+      // console.log(data.imageUrl);
       const urlKey = encodeURIComponent(data.imageUrl).replaceAll('%20', '+');
-      console.log(urlKey);
+      // console.log(urlKey);
       const imageUrl = `https://cuts-salon-images.s3.ap-south-1.amazonaws.com/${urlKey}`
-      console.log(imageUrl);
+      // console.log(imageUrl);
       setImagesUrl((prev) => ([...prev, imageUrl]));
-      console.log(imagesUrl);
+      // console.log(imagesUrl);
     } catch (error) {
       console.log(error);
     }

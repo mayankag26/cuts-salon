@@ -47,10 +47,12 @@ const SalonSchema = new Schema(
       type: String
     },
     currentNumber : {
-      type: Number
+      type: Number,
+      default : 0
     },
     availableNumber : {
-      type: Number
+      type: Number,
+      default : 0
     },
     detail:{
       type: String

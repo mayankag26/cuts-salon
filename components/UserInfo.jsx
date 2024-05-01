@@ -4,14 +4,17 @@ import React from 'react'
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { signOut } from "next-auth/react";
-// import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
+import Link from 'next/link';
 
 const UserInfo = ({ user }) => {
+  // console.log(user);
   const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [password, setPassword] = useState(user.password);
   const [address, setAddress] = useState(user.address);
   const [city, setCity] = useState(user.city);
+  const [contactNo, setContactNo] = useState(user.contactNo);
   const [currentService, setCurrentService] = useState("");
   const [currentServicePrice, setCurrentServicePrice] = useState();
 
@@ -26,37 +29,32 @@ const UserInfo = ({ user }) => {
 
   const router = useRouter();
 
+  const handleSubmit = async (e) => {
+    try {
+      const res = await fetch("api/editUser", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          name, email, address, city, services,genderServing, salontype,contactNo, openingTime, closingTime, detail 
+        }),
+      });
 
-  // const handleSubmit = async (e) => {
-  //   try {
-  //     const res = await fetch("api/users/editUser", {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         "Access-Control-Allow-Origin": "*",
-  //       },
-  //       body: JSON.stringify({
-  //         name,
-  //         email,
-  //         contactNo,
-  //         address
-  //       }),
-  //     });
-
-  //     if (res.ok) {
-  //       toast.success("Changes saved successfully", {
-  //         autoClose: 1000,
-  //         position: "top-right",
-  //       })
-  //       router.push("/");
-  //       // alert("Changes saved successfully")
-  //     } else {
-  //       console.log("User registration failed.");
-  //     }
-  //   } catch (error) {
-  //     console.log("Error during registration: ", error);
-  //   }
-  // };
+      if (res.ok) {
+        toast.success("Changes saved successfully", {
+          autoClose: 1000,
+          position: "top-right",
+        })
+        // alert("Changes saved successfully")
+      } else {
+        console.log("Salon updation failed.");
+      }
+    } catch (error) {
+      console.log("Error during updation: ", error);
+    }
+  };
 
   const handleAddService = (e) => {
     if (currentService.trim().length == 0 || !currentServicePrice) {
@@ -71,6 +69,11 @@ const UserInfo = ({ user }) => {
 
   return (
     <div className="mx-auto my-4 max-w-2xl md:my-6">
+      <div className='mb-4'>
+        <Link className="text-xl mt-3 text-right" href={"/dashboard"}>
+          <span className="underline">Dashboard</span>
+        </Link>
+      </div>
       <div className="overflow-hidden rounded-xl bg-white p-4 shadow">
         <p className="text-xl font-bold text-gray-900">Personal Info</p>
         <div className="mt-6 gap-6 space-y-4 md:grid md:grid-cols-1 md:space-y-0">
@@ -133,6 +136,22 @@ const UserInfo = ({ user }) => {
                 onChange={(e) => setCity(e.target.value)}
                 value={city}
                 id="city"
+              ></input>
+            </label>
+          </div>
+
+
+          <div className="w-full col-span-2">
+            <label
+              className="font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            >
+              Contact Number
+              <input
+                className="flex h-10 w-full rounded-md border border-black/30 bg-transparent px-3 py-2 text-sm placeholder:text-gray-600 focus:outline-none focus:ring-1 focus:ring-black/30 focus:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50"
+                type="number"
+                onChange={(e) => setContactNo(e.target.value)}
+                value={contactNo}
+                id="contactNo"
               ></input>
             </label>
           </div>
